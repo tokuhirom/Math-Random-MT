@@ -1,5 +1,5 @@
 /*
- * $Id: MT.xs,v 1.00 2002/02/08 19:22:46 ams Exp $
+ * Math::Random::MT
  * Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
  */
 
@@ -12,6 +12,11 @@
 
 typedef struct mt * Math__Random__MT;
 
+void * I32ArrayPtr ( int n ) {
+    SV * sv = sv_2mortal( NEWSV( 0, n*sizeof(I32) ) );
+    return SvPVX(sv);
+}
+
 MODULE = Math::Random::MT   PACKAGE = Math::Random::MT  PREFIX = mt_
 PROTOTYPES: DISABLE
 
@@ -20,6 +25,19 @@ mt_setup(seed)
     I32     seed
     CODE:
         RETVAL = mt_setup(seed);
+    OUTPUT:
+        RETVAL
+
+Math::Random::MT
+mt_setup_array( array, ... )
+    CODE:
+        I32 * array = I32ArrayPtr( items );
+        U32 ix_array = 0;
+        while (items--) {
+            array[ix_array] = (I32 *)SvIV(ST(ix_array));
+            ix_array++;
+        }
+        RETVAL = mt_setup_array( array, ix_array );
     OUTPUT:
         RETVAL
 

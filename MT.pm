@@ -1,4 +1,4 @@
-# $Id: MT.pm,v 1.00 2002/02/08 19:22:46 ams Exp $
+# Math::Random::MT
 # Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
 
 package Math::Random::MT;
@@ -10,14 +10,20 @@ use vars qw( @ISA $VERSION );
 
 my $gen = undef;
 @ISA = qw( DynaLoader );
-($VERSION) = q$Revision: 1.00 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.02 $ =~ /([\d.]+)/;
 
 bootstrap Math::Random::MT $VERSION;
 
 sub new
 {
-    my ($class, $seed) = @_;
-    return Math::Random::MT::setup($seed);
+    my $class = shift;
+
+    if ( @_ == 1 ) {
+        return Math::Random::MT::setup( shift );
+    }
+    else {
+        return Math::Random::MT::setup_array( @_ );
+    }
 }
 
 sub rand
@@ -60,7 +66,8 @@ Math::Random::MT - The Mersenne Twister PRNG
 
 use Math::Random::MT;
 
-$gen = Math::Random::MT->new($seed);
+$gen = Math::Random::MT->new($seed); # OR...
+$gen = Math::Random::MT->new(@seed);
 
 print $gen->rand(3);
 
@@ -85,7 +92,11 @@ above. It defines the following functions.
 
 =item new($seed)
 
-Creates a new generator and seeds it appropriately.
+Creates a new generator and seeds it with the given number.
+
+=item new(@seed)
+
+Creates a new generator and seeds it with the given array of numbers.
 
 =item rand($num)
 

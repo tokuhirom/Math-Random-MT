@@ -4,7 +4,8 @@ NAME
 SYNOPSIS
     use Math::Random::MT;
 
-    $gen = Math::Random::MT->new($seed);
+    $gen = Math::Random::MT->new($seed); # OR...
+    $gen = Math::Random::MT->new(@seed);
 
     print $gen->rand(3);
 
@@ -15,29 +16,33 @@ SYNOPSIS
     # now srand and rand behave as usual.
 
 DESCRIPTION
-    The Mersenne Twister is a pseudorandom number
-    generator developed by Makoto Matsumoto and Takuji
-    Nishimura. It is described in their paper at
+    The Mersenne Twister is a pseudorandom number generator
+    developed by Makoto Matsumoto and Takuji Nishimura. It is
+    described in their paper at
     <URL:http://www.math.keio.ac.jp/~nisimura/random/doc/mt.ps>.
 
-    This module implements two interfaces, as described in the synopsis
-    above. It defines the following functions.
+    This module implements two interfaces, as described in the
+    synopsis above. It defines the following functions.
 
   Functions
 
     new($seed)
-        Creates a new generator and seeds it appropriately.
+        Creates a new generator and seeds it with the given number.
+
+    new(@seed)
+        Creates a new generator and seeds it with the given array of
+        numbers.
 
     rand($num)
         Behaves exactly like Perl's builtin rand(), returning a number
         uniformly distributed in [0, $num) ($num defaults to 1).
 
     srand($seed)
-        This is an alternative interface to the module's
-        functionality. It behaves just like Perl's builtin srand(). If
-        you use this interface, it is strongly recommended that you
-        call srand() explicitly, rather than relying on rand() to call
-        it the first time it is used.
+        This is an alternative interface to the module's functionality.
+        It behaves just like Perl's builtin srand(). If you use this
+        interface, it is strongly recommended that you call *srand()*
+        explicitly, rather than relying on *rand()* to call it the
+        first time it is used.
 
 SEE ALSO
     <URL:http://www.math.keio.ac.jp/~matumoto/emt.html>

@@ -1,10 +1,12 @@
 /*
- * $Id: _mt.c,v 1.00 2002/02/08 19:22:46 ams Exp $
+ * Math::Random::MT
  * Copyright (C) 1997, 1999 Makoto Matsumoto and Takuji Nishimura.
  * Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
  */
 
 #include "mt.h"
+
+#include <stdio.h>
 
 /* This code is based on mt19937ar.c, written by Takuji Nishimura and
    Makoto Matsumoto (20020126). Further details are available at
@@ -17,18 +19,55 @@
    ACM Transactions on Modeling and Computer Simulation,
    Vol. 8, No. 1, January 1998, pp 3--30. */
 
-struct mt *mt_setup(unsigned long int seed)
+void mt_init_seed( struct mt *m, unsigned long int seed )
 {
     int i;
+    unsigned long *mt;
+
+    mt = m->mt;
+    mt[0] = seed & 0xffffffff;
+    for ( i = 1; i < N; i++ )
+        mt[i] = 1812433253 * (mt[i-1]^(mt[i-1]>>30)) + i;
+    m->mti = N;
+}
+
+struct mt *mt_setup(unsigned long int seed)
+{
+    struct mt *self = malloc(sizeof(struct mt));
+
+    if (self)
+        mt_init_seed( self, seed );
+
+    return self;
+}
+
+struct mt *mt_setup_array( unsigned long int *array, int n )
+{
+    int i, j, k;
     struct mt *self = malloc(sizeof(struct mt));
     unsigned long *mt;
 
     if (self) {
+        mt_init_seed( self, 19650218UL );
+
+        i = 1; j = 0;
+        k = ( N > n ? N : n );
         mt = self->mt;
-        mt[0] = seed & 0xffffffff;
-        for (i = 1; i < N; i++)
-            mt[i] = 1812433253 * (mt[i-1]^(mt[i-1]>>30)) + i;
-        self->mti = N;
+
+        for (; k; k--) {
+            mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30)) * 1664525UL))
+                    + array[j] + j;
+            i++; j++;
+            if (i>=N) { mt[0] = mt[N-1]; i=1; }
+            if (j>=n) j=0;
+        }
+        for (k=N-1; k; k--) {
+            mt[i] = (mt[i] ^ ((mt[i-1] ^ (mt[i-1] >> 30)) * 1566083941UL)) - i;
+            i++;
+            if (i>=N) { mt[0] = mt[N-1]; i=1; }
+        }
+
+        mt[0] = 0x80000000UL;
     }
 
     return self;

@@ -17,6 +17,7 @@ struct mt {
 };
 
 struct mt *mt_setup(unsigned long int seed);
+struct mt *mt_setup_array(unsigned long int *array, int n);
 void mt_free(struct mt *self);
 double mt_genrand(struct mt *self);
 
