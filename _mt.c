@@ -19,10 +19,10 @@
    ACM Transactions on Modeling and Computer Simulation,
    Vol. 8, No. 1, January 1998, pp 3--30. */
 
-void mt_init_seed( struct mt *m, unsigned long int seed )
+void mt_init_seed( struct mt *m, uint32_t seed )
 {
     int i;
-    unsigned long *mt;
+    uint32_t *mt;
 
     mt = m->mt;
     mt[0] = seed & 0xffffffff;
@@ -31,7 +31,7 @@ void mt_init_seed( struct mt *m, unsigned long int seed )
     m->mti = N;
 }
 
-struct mt *mt_setup(unsigned long int seed)
+struct mt *mt_setup(uint32_t seed)
 {
     struct mt *self = malloc(sizeof(struct mt));
 
@@ -41,11 +41,11 @@ struct mt *mt_setup(unsigned long int seed)
     return self;
 }
 
-struct mt *mt_setup_array( unsigned long int *array, int n )
+struct mt *mt_setup_array( uint32_t *array, int n )
 {
     int i, j, k;
     struct mt *self = malloc(sizeof(struct mt));
-    unsigned long *mt;
+    uint32_t *mt;
 
     if (self) {
         mt_init_seed( self, 19650218UL );
@@ -82,9 +82,9 @@ void mt_free(struct mt *self)
 double mt_genrand(struct mt *self)
 {
     int kk;
-    unsigned long int y;
-    static unsigned long int mag01[2] = {0x0, 0x9908b0df};
-    static const unsigned long int UP_MASK = 0x80000000, LOW_MASK = 0x7fffffff;
+    uint32_t y;
+    static uint32_t mag01[2] = {0x0, 0x9908b0df};
+    static const uint32_t UP_MASK = 0x80000000, LOW_MASK = 0x7fffffff;
 
     if (self->mti >= N) {
         for (kk = 0; kk < N-M; kk++) {

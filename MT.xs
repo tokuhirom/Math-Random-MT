@@ -12,8 +12,8 @@
 
 typedef struct mt * Math__Random__MT;
 
-void * I32ArrayPtr ( int n ) {
-    SV * sv = sv_2mortal( NEWSV( 0, n*sizeof(I32) ) );
+void * U32ArrayPtr ( int n ) {
+    SV * sv = sv_2mortal( NEWSV( 0, n*sizeof(U32) ) );
     return SvPVX(sv);
 }
 
@@ -22,7 +22,7 @@ PROTOTYPES: DISABLE
 
 Math::Random::MT
 mt_setup(seed)
-    I32     seed
+    U32     seed
     CODE:
         RETVAL = mt_setup(seed);
     OUTPUT:
@@ -31,13 +31,13 @@ mt_setup(seed)
 Math::Random::MT
 mt_setup_array( array, ... )
     CODE:
-        I32 * array = I32ArrayPtr( items );
+        U32 * array = U32ArrayPtr( items );
         U32 ix_array = 0;
         while (items--) {
-            array[ix_array] = (I32 *)SvIV(ST(ix_array));
+            array[ix_array] = (U32)SvIV(ST(ix_array));
             ix_array++;
         }
-        RETVAL = mt_setup_array( array, ix_array );
+        RETVAL = mt_setup_array( (uint32_t*)array, ix_array );
     OUTPUT:
         RETVAL
 
