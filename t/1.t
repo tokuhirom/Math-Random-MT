@@ -9,6 +9,6 @@ END   { print "not ok 1\n" unless $loaded }
 
 use Math::Random::MT;
 ok($loaded = 1);
-ok(my $gen = Math::Random::MT->new(4357));
-ok(0.667576477630064, $gen->rand());
-ok(0.369083872530609, $gen->rand());
+ok(my $gen = Math::Random::MT->new(5489));
+ok(0.814723691903055, $gen->rand());
+ok(0.135477004107088, $gen->rand());

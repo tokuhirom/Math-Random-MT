@@ -1,5 +1,5 @@
 /*
- * $Id: MT.xs,v 0.54 2001/05/09 00:57:30 ams Exp $
+ * $Id: MT.xs,v 1.00 2002/02/08 19:22:46 ams Exp $
  * Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
  */
 

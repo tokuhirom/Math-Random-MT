@@ -1,4 +1,4 @@
-# $Id: MT.pm,v 0.54 2001/05/09 00:57:30 ams Exp $
+# $Id: MT.pm,v 1.00 2002/02/08 19:22:46 ams Exp $
 # Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
 
 package Math::Random::MT;
@@ -8,9 +8,9 @@ use Carp;
 use DynaLoader;
 use vars qw( @ISA $VERSION );
 
-my $gen;
+my $gen = undef;
 @ISA = qw( DynaLoader );
-($VERSION) = q$Revision: 0.54 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.00 $ =~ /([\d.]+)/;
 
 bootstrap Math::Random::MT $VERSION;
 
@@ -23,10 +23,18 @@ sub new
 sub rand
 {
     my ($self, $N) = @_;
-    if (ref $self) { return ($N    || 1) * $self->genrand(); }
-    else           { return ($self || 1) * $gen-> genrand(); }
+    if (ref $self) {
+        return ($N || 1) * $self->genrand();
+    }
+    else {
+        $N = $self;
+        Math::Random::MT::srand() unless defined $gen;
+        return ($N || 1) * $gen->genrand();
+    }
 }
-sub srand { $gen = new Math::Random::MT shift; }
+
+# Don't rely on the default seed.
+sub srand { $gen = new Math::Random::MT (shift || time); }
 
 sub import
 {
@@ -87,7 +95,9 @@ distributed in [0, $num) ($num defaults to 1).
 =item srand($seed)
 
 This is an alternative interface to the module's functionality. It
-behaves just like Perl's builtin srand().
+behaves just like Perl's builtin srand(). If you use this interface, it
+is strongly recommended that you call I<srand()> explicitly, rather than
+relying on I<rand()> to call it the first time it is used.
 
 =back
 
@@ -104,6 +114,10 @@ Math::TrulyRandom
 =item Sean M. Burke
 
 For giving me the idea to write this module.
+
+=item Philip Newton
+
+For several useful patches.
 
 =back
 

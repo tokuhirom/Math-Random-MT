@@ -34,7 +34,10 @@ DESCRIPTION
 
     srand($seed)
         This is an alternative interface to the module's
-        functionality. It behaves just like Perl's builtin srand().
+        functionality. It behaves just like Perl's builtin srand(). If
+        you use this interface, it is strongly recommended that you
+        call srand() explicitly, rather than relying on rand() to call
+        it the first time it is used.
 
 SEE ALSO
     <URL:http://www.math.keio.ac.jp/~matumoto/emt.html>
@@ -44,6 +47,9 @@ SEE ALSO
 ACKNOWLEDGEMENTS
     Sean M. Burke
         For giving me the idea to write this module.
+
+    Philip Newton
+        For several useful patches.
 
 AUTHOR
     Abhijit Menon-Sen <ams@wiw.org>

@@ -1,16 +1,14 @@
 /*
- * $Id: _mt.c,v 0.54 2001/05/09 00:57:30 ams Exp $
+ * $Id: _mt.c,v 1.00 2002/02/08 19:22:46 ams Exp $
  * Copyright (C) 1997, 1999 Makoto Matsumoto and Takuji Nishimura.
  * Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
  */
 
 #include "mt.h"
 
-/* This code is based on mt19937-1.c, written by Takuji Nishimura, with
-   suggestions from Topher Cooper and Marc Rieffel in July-August 1997.
-
-   See <URL:http://www.math.keio.ac.jp/matumoto/emt.html> for more
-   details.
+/* This code is based on mt19937ar.c, written by Takuji Nishimura and
+   Makoto Matsumoto (20020126). Further details are available at
+   <URL:http://www.math.keio.ac.jp/matumoto/emt.html>.
 
    REFERENCE
    M. Matsumoto and T. Nishimura,
@@ -23,14 +21,13 @@ struct mt *mt_setup(unsigned long int seed)
 {
     int i;
     struct mt *self = malloc(sizeof(struct mt));
+    unsigned long *mt;
 
     if (self) {
-        for (i = 0; i < N; i++) {
-            self->mt[i] = seed & 0xffff0000;
-            seed = 69069 * seed + 1;
-            self->mt[i] |= (seed & 0xffff0000) >> 16;
-            seed = 69069 * seed + 1;
-        }
+        mt = self->mt;
+        mt[0] = seed & 0xffffffff;
+        for (i = 1; i < N; i++)
+            mt[i] = 1812433253 * (mt[i-1]^(mt[i-1]>>30)) + i;
         self->mti = N;
     }
 
@@ -73,5 +70,5 @@ double mt_genrand(struct mt *self)
     y ^= y << 15 & 0xefc60000;
     y ^= y >> 18;
 
-    return (double)y * 2.3283064365386963e-10;
+    return y*(1.0/4294967296.0);
 }
