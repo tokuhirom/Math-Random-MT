@@ -10,7 +10,7 @@ use vars qw( @ISA $VERSION );
 
 my $gen = undef;
 @ISA = qw( DynaLoader );
-($VERSION) = q$Revision: 1.02 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.03 $ =~ /([\d.]+)/;
 
 bootstrap Math::Random::MT $VERSION;
 
@@ -92,11 +92,12 @@ above. It defines the following functions.
 
 =item new($seed)
 
-Creates a new generator and seeds it with the given number.
+Creates a new generator seeded with an unsigned 32-bit integer.
 
 =item new(@seed)
 
-Creates a new generator and seeds it with the given array of numbers.
+Creates a new generator seeded with an array of (up to 624) unsigned
+32-bit integers.
 
 =item rand($num)
 
