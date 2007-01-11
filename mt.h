@@ -5,7 +5,7 @@
 
 #include <stdlib.h>
 
-#if defined(__linux__)
+#if defined(__linux__) || defined(__WIN32__)
 #include <stdint.h>
 #elif defined(__osf__)
 #include <inttypes.h>

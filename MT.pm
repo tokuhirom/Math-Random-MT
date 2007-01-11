@@ -10,7 +10,7 @@ use vars qw( @ISA $VERSION );
 
 my $gen = undef;
 @ISA = qw( DynaLoader );
-($VERSION) = q$Revision: 1.04 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.05 $ =~ /([\d.]+)/;
 
 bootstrap Math::Random::MT $VERSION;
 
