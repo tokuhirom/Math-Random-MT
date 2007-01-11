@@ -10,7 +10,7 @@ use vars qw( @ISA $VERSION );
 
 my $gen = undef;
 @ISA = qw( DynaLoader );
-($VERSION) = q$Revision: 1.05 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.06 $ =~ /([\d.]+)/;
 
 bootstrap Math::Random::MT $VERSION;
 
@@ -64,18 +64,18 @@ Math::Random::MT - The Mersenne Twister PRNG
 
 =head1 SYNOPSIS
 
-use Math::Random::MT;
+ use Math::Random::MT;
 
-$gen = Math::Random::MT->new($seed); # OR...
-$gen = Math::Random::MT->new(@seed);
+ $gen = Math::Random::MT->new($seed); # OR...
+ $gen = Math::Random::MT->new(@seed);
 
-print $gen->rand(3);
+ print $gen->rand(3);
 
-OR
+ OR
 
-use Math::Random::MT qw(srand rand);
+ use Math::Random::MT qw(srand rand);
 
-# now srand and rand behave as usual.
+ # now srand and rand behave as usual.
 
 =head1 DESCRIPTION
 
