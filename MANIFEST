@@ -3,6 +3,7 @@ MT.pm
 MT.xs
 Makefile.PL
 README
+Changes
 _mt.c
 mt.h
 ppport.h

@@ -1,0 +1,32 @@
+1.07    2007-01-12      Abhijit Menon-Sen <ams@toroid.org>
+
+    * Add the Changes file to the MANIFEST, in addition to editing it
+      each time. (Thanks to John M. Gamble.)
+
+      There have been no changes in functionality since 1.03.
+
+
+1.06    2007-01-11      Abhijit Menon-Sen <ams@toroid.org>
+
+    * Minor POD fix from Steven Schubiger.
+
+
+1.05    2007-01-11      Abhijit Menon-Sen <ams@toroid.org>
+
+    * Mingw compile fix from Steffen Mueller.
+
+
+1.04    2004-10-09      Abhijit Menon-Sen <ams@wiw.org>
+
+    * Incorporated some compile fixes from Gordon Lack.
+
+
+1.02    2004-05-07      Abhijit Menon-Sen <ams@wiw.org>
+
+    * Added support for seeding the random number generator with an
+      array of numbers, as suggested by Philip M. Feldman.
+
+
+1.00    2002-02-09      Abhijit Menon-Sen <ams@wiw.org>
+
+    * First stable release.
