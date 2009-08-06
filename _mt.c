@@ -1,16 +1,11 @@
-/*
- * Math::Random::MT
- * Copyright (C) 1997, 1999 Makoto Matsumoto and Takuji Nishimura.
- * Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
- */
-
 #include "mt.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 
 /* This code is based on mt19937ar.c, written by Takuji Nishimura and
    Makoto Matsumoto (20020126). Further details are available at
-   <URL:http://www.math.keio.ac.jp/matumoto/emt.html>.
+   <http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html>.
 
    REFERENCE
    M. Matsumoto and T. Nishimura,

@@ -1,11 +1,9 @@
-/*
- * $Id: mt.h,v 1.00 2002/02/08 19:22:46 ams Exp $
- * Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
- */
+#ifndef _MATH_MT_H_
+#define _MATH_MT_H_
 
-#include <stdlib.h>
-
-#if defined(__linux__) || defined(__WIN32__)
+#if defined(_MSC_VER) && (_MSC_VER <= 1300)
+typedef unsigned __int32 uint32_t;
+#elif defined(__linux__) || defined(__GLIBC__) || defined(__WIN32__)
 #include <stdint.h>
 #elif defined(__osf__)
 #include <inttypes.h>
@@ -13,10 +11,6 @@
 #include <sys/types.h>
 #endif
 
-#ifndef _MATH_MT_H_
-#define _MATH_MT_H_
-
-/* Period parameters */
 enum { N = 624, M = 397 };
 
 struct mt {

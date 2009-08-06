@@ -1,6 +1,3 @@
-# Math::Random::MT
-# Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
-
 package Math::Random::MT;
 
 use strict;
@@ -10,7 +7,7 @@ use vars qw( @ISA $VERSION );
 
 my $gen = undef;
 @ISA = qw( DynaLoader );
-($VERSION) = q$Revision: 1.07 $ =~ /([\d.]+)/;
+$VERSION = '1.10';
 
 bootstrap Math::Random::MT $VERSION;
 
@@ -115,7 +112,7 @@ relying on I<rand()> to call it the first time it is used.
 
 =head1 SEE ALSO
 
-<URL:http://www.math.keio.ac.jp/~matumoto/emt.html>
+<URL:http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html>
 
 Math::TrulyRandom
 
@@ -135,9 +132,12 @@ For several useful patches.
 
 =head1 AUTHOR
 
-Abhijit Menon-Sen <ams@wiw.org>
+Abhijit Menon-Sen <ams@toroid.org>
 
 Copyright 2001 Abhijit Menon-Sen. All rights reserved.
 
-This software is distributed under the terms of the Artistic License
-<URL:http://ams.wiw.org/code/artistic.txt>.
+Based on the C implementation of MT19937
+Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura
+
+This software is distributed under a (three-clause) BSD-style license.
+See the LICENSE file in the distribution for details.

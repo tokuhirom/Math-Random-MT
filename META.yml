@@ -1,10 +1,12 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Math-Random-MT
-version:      1.07
-version_from: MT.pm
-installdirs:  site
-requires:
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.17
+--- #YAML:1.0
+name:                Math-Random-MT
+version:             1.10
+abstract:            The Mersenne Twister PRNG
+license:             ~
+author:              ~
+generated_by:        ExtUtils::MakeMaker version 6.44
+distribution_type:   module
+requires:     
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3

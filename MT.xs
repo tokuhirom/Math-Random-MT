@@ -1,8 +1,3 @@
-/*
- * Math::Random::MT
- * Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
- */
-
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
